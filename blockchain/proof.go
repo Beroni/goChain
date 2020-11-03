@@ -5,7 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"fmt"
-	"log"
+	"goChain/errors"
 	"math"
 	"math/big"
 )
@@ -34,6 +34,7 @@ func NewProof(b *Block) *ProofOfWork {
 	target.Lsh(target, uint(256-Difficulty))
 
 	pow := &ProofOfWork{b, target}
+
 	return pow
 }
 
@@ -93,9 +94,7 @@ func ToByte(num int64) []byte {
 
 	err := binary.Write(buff, binary.BigEndian, num)
 
-	if err != nil {
-		log.Panic(err)
-	}
+	errors.Handle(err)
 
 	return buff.Bytes()
 
