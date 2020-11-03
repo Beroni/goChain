@@ -28,7 +28,7 @@ func CreateGenesisBlock() *Block {
 	return CreateBlock("Genesis", []byte{})
 }
 
-func Serialize(b *Block) []byte {
+func (b *Block) Serialize() []byte {
 	var res bytes.Buffer
 
 	encoder := gob.NewEncoder(&res)
